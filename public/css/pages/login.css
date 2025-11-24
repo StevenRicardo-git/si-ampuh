@@ -78,10 +78,8 @@ body {
 
     .title-onload {
         white-space: nowrap;
-        width: 130%;
-        white-space: nowrap;
-        margin-left: auto;
-        font-size: 1.3em; 
+        width: 102%; 
+        font-size: 0.8em; 
         letter-spacing: 1px;
         padding: 0;
         box-sizing: border-box;
