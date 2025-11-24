@@ -59,6 +59,47 @@ body {
   100% { --a: 360deg; }
 }
 
+@media (max-width: 600px) {
+    .box {
+        width: 90%;
+        max-width: 350px;
+        height: 180px;
+    }
+
+    .box.open {
+        width: 95%;
+        max-width: 400px;
+        height: 600px;
+    }
+
+    .login {
+        inset: 20px;
+    }
+
+    .title-onload {
+        font-size: 2.2em;
+    }
+
+    .box.open .title-onload {
+        font-size: 2em;
+        transform: translateY(-50px);
+    }
+
+    .loginBx {
+        width: 100%;
+    }
+
+    .logo {
+        height: 100px;
+        margin-top: -10px;
+    }
+
+    .subtitle {
+        font-size: 0.9em;
+        margin-top: 40px;
+    }
+}
+
 .box::before {
   content: "";
   position: absolute;

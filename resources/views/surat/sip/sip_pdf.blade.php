@@ -11,16 +11,24 @@
             margin: 0;
             padding: 0;
         }
+
         @page {
-            margin: 2cm 2cm 2cm 2cm;
-            size: folio portrait;
+            margin: 1cm 2.5cm;
         }
+
+        .spacer-top {
+            margin-top: 1cm; 
+        }
+
         .container {
             width: 100%;
         }
         .page-break {
             page-break-after: always;
-        }
+            height: 0;
+            display: block;
+            visibility: hidden;
+        }   
         
         .page-wrapper-sip {
             position: relative;
@@ -35,13 +43,14 @@
             width: 100%;
         }
         .header .logo-kiri {
-            max-height: 70px;
+            max-height: 75px;
             float: left;
-            margin-right: 10px;
+            margin-right: 20px;
         }
         .non-italic {
             font-style: normal !important;
         }
+        
         .kop-surat-teks { text-align: center; }
         .header h1 { font-size: 14pt; font-weight: bold; margin: 0; line-height: 1.2; }
         .header h2 { font-size: 16pt; font-weight: bold; margin: 0; line-height: 1.2; }
@@ -49,22 +58,26 @@
         .clear { clear: both; }
         .line-divider {
             border-bottom: 3px solid black;
-            margin-top: 6px;
-            margin-bottom: 12px;
+            margin-top: 8px;
+            margin-bottom: 10px;
+            margin-left: -1.3cm;  
+            margin-right: -1.3cm;
         }
         .title {
             text-align: center;
             font-size: 12pt;
             font-weight: bold;
             text-decoration: underline;
-            margin-top: 12px;
-            margin-bottom: 0px;
+            margin-top: 10px;
+            margin-bottom: 4px;
         }
         .subtitle {
             text-align: center;
             font-size: 12pt;
-            margin-top: 0px;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
+            line-height: 1.2;
+            margin-top: 0;
+            margin-bottom: 2px;
         }
         .content {
             margin-top: 10px;
@@ -122,7 +135,7 @@
 
         .signature-box-right {
             width: 50%;
-            margin-left: 50%;
+            margin-left: 55%;
             text-align: center;
         }
         .signature-box-right p { margin: 0; line-height: 1.3; }
@@ -132,10 +145,10 @@
 
         .catatan-sip {
             position: absolute;
-            bottom: 0;
+            bottom: -20px;
             width: 100%;
             border-top: 1px solid black;
-            padding-top: 8px;
+            padding-top: 0;
             padding-left: 15px;
             padding-right: 15px;
         }
@@ -144,6 +157,7 @@
             font-style: italic;
             font-weight: bold;
             margin-bottom: 6px;
+            margin-top: 2px;
         }
         .catatan-sip ol {
             margin: 0;
@@ -186,7 +200,7 @@
         .family-table td.center { text-align: center; }
         .family-signature {
             margin-top: 30px;
-            width: 300px;
+            width: 250px;
             float: right;
             text-align: center;
         }
@@ -259,10 +273,10 @@
 
         .bast-catatan {
             position: absolute;
-            bottom: 0;
+            bottom: -20px;
             width: 100%;
             border-top: 1px solid black;
-            padding-top: 8px;
+            padding-top: 2px;
             padding-left: 15px;
             padding-right: 15px;
         }
@@ -271,6 +285,7 @@
             font-style: italic;
             line-height: 1.3;
             text-align: justify;
+            margin-top: 2px;
         }
     </style>
 </head>
@@ -296,7 +311,7 @@
             <div class="content">
                 <p>Berdasarkan pada Surat Perjanjian Sewa Menyewa Rusunawa Nomor {{ $kontrak->no_sps ?? '' }}, maka kepada tersebut di bawah ini:</p>
 
-                <table class="data-table" style="margin-left: 20px;">
+                <table class="data-table">
                     <tr>
                         <td class="label">Nama</td>
                         <td class="separator">:&nbsp;</td>
@@ -428,21 +443,34 @@
         <div class="family-signature">
             <p>Tegal, {{ $tanggal_cetak }}</p>
             <p>Calon Penghuni/ Penghuni</p>
-            <br><br><br>
+            <br><br>
             <p class="nama" style="text-transform: uppercase;">{{ $penghuni->nama }}</p>
         </div>
     </div>
     
     @php
         $tglSps = $kontrak->tanggal_sps ?? $kontrak->tanggal_masuk;
-        $tanggalSpsLengkap = $tglSps ? \Carbon\Carbon::parse($tglSps)->translatedFormat('l \T\a\n\g\g\a\l d F Y') : '.......';
+        
+        if ($tglSps) {
+            $date = \Carbon\Carbon::parse($tglSps);
+            
+            $hari = $date->translatedFormat('l'); 
+            $bulan = $date->translatedFormat('F'); 
+            
+            $tglTerbilang = ucwords(\App\Helpers\TerbilangHelper::convert($date->day)); 
+            $thnTerbilang = ucwords(\App\Helpers\TerbilangHelper::convert($date->year)); 
+            
+            $tanggalSpsLengkap = "$hari Tanggal $tglTerbilang Bulan $bulan Tahun $thnTerbilang";
+        } else {
+            $tanggalSpsLengkap = '';
+        }
     @endphp
 
     <div class="page-break"></div>
     <div class="container sps-container">
         <p class="sps-title">PERJANJIAN SEWA MENYEWA</p>
         <p class="sps-title" style="margin-top: 0;">RUMAH SUSUN SEDERHANA SEWA (RUSUNAWA)</p>
-        <p class="sps-subtitle">Nomor: {{ $kontrak->no_sps ?? '600.2.6/54' }}</p>
+        <p class="sps-subtitle">Nomor : {{ $kontrak->no_sps ?? '' }}</p>
 
         <table class="sps-table">
             <tr>
@@ -512,7 +540,11 @@
                 <td class="num">3.</td>
                 <td style="text-align: justify;">Penyewa adalah penghuni/penyewa membayar biaya sewa dan telah mendapat persetujuan tertulis dari pengelola rumah susun untuk menghuni atau bertempat tinggal pada jangka waktu tertentu.</td>
             </tr>
+            </table>
 
+            <div class="page-break"></div>
+
+            <table class="sps-table">
             <tr>
                 <td colspan="2" class="pasal-title">BIAYA SEWA<br>Pasal 2</td>
             </tr>
@@ -645,7 +677,7 @@
         
         <p class="title" style="text-decoration: none; margin-bottom: 0; text-decoration: underline;">BERITA ACARA SERAH TERIMA UNIT HUNIAN</p>
         <p class="title" style="margin-top: 0; margin-bottom: 5px;">RUMAH SUSUN SEDERHANA SEWA</p>
-        <p class="subtitle" style="text-decoration: none;">Nomor: 648/144.B</p>
+        <p class="subtitle" style="text-decoration: none; margin-right: 120px;">Nomor : {{ '' }}</p>
 
         <div class="content" style="text-align: left;">
             <p>Berdasarkan pada Surat Perjanjian Sewa Menyewa Rusunawa Nomor {{ $kontrak->no_sps ?? '' }}, maka kepada tersebut di bawah ini:</p>
@@ -716,24 +748,30 @@
             @php
                 $pengelola = $staffList->get(1); 
             @endphp
-            <div class="signature-section" style="margin-top: 20px;">
-                <div class="signature-box left" style="width: 50%; float: left; text-align: center; line-height:1">
-                    <p>PENYEWA,</p>
-                    <br><br><br><br>
-                    <p class="nama" style="text-transform: uppercase; font-weight:bold; text-decoration: underline;">{{ $penghuni->nama }}</p>
-                </div>
-                <div class="signature-box right" style="width: 50%; float: right; text-align: center;">
-                    <p>PENGELOLA,</p>
-                    <br><br><br>
-                    <p class="nama" style="text-transform: uppercase; font-weight:bold; text-decoration:underline; line-height:1;">
-                        {{ $pengelola ? $pengelola->nama : '(Nama Pengelola)' }}
-                    </p>
-                    @if($pengelola && $pengelola->nip)
-                        <p class="nip" style="margin-top: none; text-decoration: none; line-height:1;">NIP. {{ $pengelola->nip }}</p>
-                    @endif
-                </div>
-                <div style="clear: both;"></div>
-            </div>
+            <table style="width: 100%; margin-top: 50px; border: none; border-collapse: collapse;">
+                <tr>
+                    <td style="width: 50%; text-align: center; vertical-align: top; padding: 0;">
+                        <p style="margin: 0; line-height: 1;">PENYEWA,</p>
+                        <br><br><br>
+                        <p class="nama" style="text-transform: uppercase; font-weight:bold; text-decoration: underline; margin: 0; line-height: 1;">
+                            {{ $penghuni->nama }}
+                        </p>
+                    </td>
+
+                    <td style="width: 50%; text-align: center; vertical-align: top; padding: 0;">
+                        <p style="margin: 0; line-height: 1;">PENGELOLA,</p>
+                        <br><br><br>
+                        <p class="nama" style="text-transform: uppercase; font-weight:bold; text-decoration: underline; margin: 0; line-height: 1;">
+                            {{ $pengelola ? $pengelola->nama : '(Nama Pengelola)' }}
+                        </p>
+                        @if($pengelola && $pengelola->nip)
+                            <p class="nip" style="margin-top: 2px; text-decoration: none; line-height: 1;">
+                                NIP. {{ $pengelola->nip }}
+                            </p>
+                        @endif
+                    </td>
+                </tr>
+            </table>
             
             <div class="bast-catatan">
                 <p>

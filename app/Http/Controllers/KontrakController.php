@@ -288,11 +288,9 @@ class KontrakController extends Controller
             'alasan_keluar' => old('alasan_keluar', $kontrak->alasan_keluar ?? 'mengundurkan diri dari hunian Rusunawa'),
             'tunggakan_sewa' => old('tunggakan_sewa', 0),
             'periode_tunggakan_sewa' => old('periode_tunggakan_sewa', ''),
-            'tunggakan_denda' => old('tunggakan_denda', 0),
             'periode_tunggakan_denda' => old('periode_tunggakan_denda', ''),
             'tunggakan_air' => old('tunggakan_air', 0),
             'tunggakan_listrik' => old('tunggakan_listrik', 0),
-            'tanggal_pelunasan' => old('tanggal_pelunasan', ''),
         ];
 
         return view('surat.ba.edit_ba_keluar', compact('kontrak', 'formData', 'kepalaDinas', 'staff'));
@@ -314,11 +312,10 @@ class KontrakController extends Controller
             'alasan_keluar' => 'required|string',
             'tunggakan_sewa' => 'nullable|numeric|min:0',
             'periode_tunggakan_sewa' => 'nullable|string|max:255',
-            'tunggakan_denda' => 'nullable|numeric|min:0',
-            'periode_tunggakan_denda' => 'nullable|string|max:255',
             'tunggakan_air' => 'nullable|numeric|min:0',
+            'periode_tunggakan_air' => 'nullable|string|max:255',
             'tunggakan_listrik' => 'nullable|numeric|min:0',
-            'tanggal_pelunasan' => 'nullable|string|max:255',
+            'periode_tunggakan_listrik' => 'nullable|string|max:255',
         ]);
 
         $kontrak = Kontrak::with(['penghuni', 'unit'])->findOrFail($id);
@@ -342,6 +339,12 @@ class KontrakController extends Controller
         $unit = $kontrak->unit;
 
         $form = $validated;
+        $sewa = $validated['tunggakan_sewa'] ?? 0;
+        $denda = 0;
+        if ($sewa > 0) {
+            $denda = $sewa * 0.10;
+        }
+        $form['tunggakan_denda'] = $denda;
         $tanggalKeluarAktual = $kontrak->tanggal_keluar_aktual ?? $kontrak->tanggal_keluar;
         $carbonDate = \Carbon\Carbon::parse($tanggalKeluarAktual);
         $hari = $carbonDate->translatedFormat('l');
@@ -355,11 +358,11 @@ class KontrakController extends Controller
         $nilai_jaminan = $kontrak->nilai_jaminan ?? 0;
         
         $jumlah_tunggakan = ($validated['tunggakan_sewa'] ?? 0) 
-            + ($validated['tunggakan_denda'] ?? 0)
+            + $denda
             + ($validated['tunggakan_air'] ?? 0)
             + ($validated['tunggakan_listrik'] ?? 0);
         
-        $sisa_tunggakan = max(0, $jumlah_tunggakan - $nilai_jaminan);
+        $sisa_tunggakan = $jumlah_tunggakan - $nilai_jaminan;
         $jaminan_terbilang = \App\Helpers\TerbilangHelper::convert($nilai_jaminan);
 
         $kepala_dinas_nama = $kepalaDinas->nama;

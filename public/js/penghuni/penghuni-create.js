@@ -859,6 +859,17 @@ document.addEventListener('DOMContentLoaded', async function() {
     };
 
     if (jumlahAnak) {
+        if (parseInt(jumlahAnak.value) === 0) {
+            jumlahAnak.value = '';
+        }
+        jumlahAnak.addEventListener('input', function() {
+            let val = this.value.replace(/\D/g, '');
+            if (val === '' || parseInt(val) === 0) {
+                this.value = '';
+            } else {
+                this.value = parseInt(val, 10).toString();
+            }
+        });
         jumlahAnak.addEventListener('change', function() {
             generateAnakForms(parseInt(this.value) || 0);
         });
