@@ -61,26 +61,29 @@ body {
 
 @media (max-width: 600px) {
     .box {
-        width: 95%;
+        width: 96%;
         max-width: 380px;
         height: 160px;
     }
 
     .box.open {
-        width: 90%;
+        width: 95%;
+        max-width: 400px;
         height: 580px;
     }
 
     .login {
-        inset: 15px;
+        inset: 10px;
     }
 
     .title-onload {
         font-size: 1.6em;
         letter-spacing: 1px;
-        white-space: nowrap;
-        width: 200%;
+        width: 100%;
+        padding: 0 5px;
+        box-sizing: border-box;
         text-align: center;
+        overflow: visible;
     }
 
     .box.open .title-onload {
