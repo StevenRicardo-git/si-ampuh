@@ -78,7 +78,9 @@ body {
 
     .title-onload {
         white-space: nowrap;
-        width: 105%; 
+        width: 130%;
+        white-space: nowrap;
+        margin-left: auto;
         font-size: 1.3em; 
         letter-spacing: 1px;
         padding: 0;
