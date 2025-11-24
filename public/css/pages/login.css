@@ -77,10 +77,11 @@ body {
     }
 
     .title-onload {
-        font-size: 1.6em;
+        white-space: nowrap;
+        width: 105%; 
+        font-size: 1.3em; 
         letter-spacing: 1px;
-        width: 100%;
-        padding: 0 5px;
+        padding: 0;
         box-sizing: border-box;
         text-align: center;
         overflow: visible;
