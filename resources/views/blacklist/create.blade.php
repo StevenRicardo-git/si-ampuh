@@ -7,18 +7,7 @@
         <h1 class="text-3xl font-bold text-gray-800">Tambah Data Blacklist Manual</h1>
         <p class="text-gray-500 mt-1">Masukkan data NIK yang ingin Anda blokir secara manual.</p>
     </div>
-
-    @if(session('error'))
-    <div class="bg-red-50 border-l-4 border-red-300 rounded-lg p-4 mb-6">
-        <div class="flex items-center">
-            <svg class="w-6 h-6 text-red-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-            <p class="font-bold text-red-800">{!! session('error') !!}</p>
-        </div>
-    </div>
-    @endif
-
+        
     <div class="bg-white p-6 rounded-xl shadow-md">
         <form id="createBlacklistForm" action="{{ route('blacklist.store') }}" method="POST">
             @csrf
