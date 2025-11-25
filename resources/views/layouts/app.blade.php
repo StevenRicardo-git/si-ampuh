@@ -7,10 +7,10 @@
     <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
     <meta http-equiv="Pragma" content="no-cache">
     <meta http-equiv="Expires" content="0">
-    <title>@yield('title', 'Dashboard') - SI-MATA</title>
-    <link rel="icon" type="image/png" href="{{ asset('images/simata.png') }}">
-    <link rel="shortcut icon" href="{{ asset('images/simata.png') }}">
-    <link rel="apple-touch-icon" href="{{ asset('images/simata.png') }}">
+    <title>@yield('title', 'Dashboard') - SI-AMPUH</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/si-ampuh-nobg.png') }}">
+    <link rel="shortcut icon" href="{{ asset('images/si-ampuh-nobg.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/si-ampuh-nobg.png') }}">
 
     <script>
         (function() {
@@ -285,7 +285,7 @@
             </div>
             
             <h2 style="font-size: 30px; font-weight: 700; color: white; margin-bottom: 16px;">Logging Out...</h2>
-            <p style="color: white; font-size: 18px; opacity: 0.9; margin-bottom: 32px;">Terima kasih telah menggunakan SI-MATA</p>
+            <p style="color: white; font-size: 18px; opacity: 0.9; margin-bottom: 32px;">Terima kasih telah menggunakan SI-AMPUH</p>
             
             <div style="display: flex; justify-content: center; gap: 8px;">
                 <div style="width: 12px; height: 12px; background: white; border-radius: 50%;" class="animate-bounce-dots"></div>

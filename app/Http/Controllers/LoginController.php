@@ -33,7 +33,7 @@ class LoginController extends Controller
             $request->session()->regenerate();
 
             return redirect()->intended(route('dashboard'))
-                ->with('success', 'Selamat datang di SI-MATA!');
+                ->with('success', 'Selamat datang di SI-AMPUH!');
         }
 
         return back()

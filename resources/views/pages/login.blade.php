@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Login - SI-MATA</title>
+    <title>Login - SI-AMPUH</title>
     
-    <link rel="icon" type="image/png" href="{{ asset('images/simata.png') }}">
-    <link rel="shortcut icon" type="image/png" href="{{ asset('images/simata.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/si-ampuh-nobg.png') }}">
+    <link rel="shortcut icon" type="image/png" href="{{ asset('images/si-ampuh-nobg.png') }}">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -22,12 +22,12 @@
     <div class="box">
         <div class="box-content"> 
             <div class="login">
-                <h2 class="title-onload">SI-MATA</h2>
+                <h2 class="title-onload">SI-AMPUH</h2>
                 <div class="loginBx">
-                    <img src="{{ asset('images/simata.png') }}" alt="SI-MATA Logo" class="logo">
-                    <p class="subtitle">Sistem Informasi Audit & Manajemen 
+                    <img src="{{ asset('images/si-ampuh.png') }}" alt="SI-MATA Logo" class="logo">
+                    <p class="subtitle">Sistem Informasi Audit & Manajemen
                         <br>
-                        Tagihan Akurat Rusunawa
+                        Penghuni Unit Hunian
                     </p>
                     
                     <form id="loginForm" action="{{ route('login.authenticate') }}" method="POST">
@@ -105,7 +105,7 @@
             </div>
             
             <h2>Logging In...</h2>
-            <p>Selamat datang di SI-MATA</p>
+            <p>Selamat datang di SI-AMPUH</p>
             
             <div class="dots-wrapper">
                 <div class="dot animate-bounce-dots"></div>
