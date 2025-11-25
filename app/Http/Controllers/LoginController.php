@@ -41,7 +41,7 @@ class LoginController extends Controller
                 'username' => 'Username atau password salah.',
             ])
             ->withInput($request->except('password'))
-            ->with('error', 'Username atau password salah.');
+            ->with('error', 'Gagal Login! Silakan input ulang!');
     }
 
     public function logout(Request $request)
