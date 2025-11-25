@@ -19,7 +19,6 @@
 <body>
     <div class="background-blur"></div>
     <div id="fireworks-container"></div>
-    ...
     <div class="box">
         <div class="box-content"> 
             <div class="login">
@@ -77,7 +76,7 @@
                     </form>
 
                     @if(session('error'))
-                    <div class="session-message error">
+                    <div class="session-message error" style="display: none;">
                         {{ session('error') }}
                     </div>
                     @endif
@@ -91,7 +90,6 @@
             </div>
         </div> 
     </div>
-    ...
 
     <div id="loginAnimation">
         <div class="animation-content">

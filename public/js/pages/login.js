@@ -81,6 +81,52 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
+    function showToast(message, type = 'error', duration = 5000) {
+        let container = document.querySelector('.toast-container');
+        if (!container) {
+            container = document.createElement('div');
+            container.className = 'toast-container';
+            document.body.appendChild(container);
+        }
+
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        
+        const icons = {
+            error: '✕',
+            success: '✓',
+            warning: '⚠'
+        };
+
+        const iconHtml = `<div class="toast-icon">${icons[type] || '!'}</div>`;
+        
+        toast.innerHTML = `
+            ${iconHtml}
+            <div class="toast-content">${message}</div>
+        `;
+
+        container.appendChild(toast);
+
+        if (duration > 0) {
+            setTimeout(() => {
+                removeToast(toast);
+            }, duration);
+        }
+    }
+
+    function removeToast(toast) {
+        toast.classList.add('removing');
+        setTimeout(() => {
+            toast.remove();
+        }, 300);
+    }
+
+    const errorAlert = document.querySelector('.session-message.error');
+    if (errorAlert) {
+        const errorMessage = errorAlert.textContent.trim();
+        showToast(errorMessage, 'error', 5000);
+    }
+
     const loginForm = document.getElementById('loginForm');
     
     if (loginForm) {
@@ -91,11 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const password = passwordInput.value.trim();
             
             if (!username || !password) {
-                if (typeof showToast === 'function') {
-                    showToast('Username dan password harus diisi!', 'error');
-                } else {
-                    alert('Username dan password harus diisi!');
-                }
+                showToast('Username dan password harus diisi!', 'error');
                 return;
             }
             
