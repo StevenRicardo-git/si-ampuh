@@ -676,29 +676,6 @@
             </a>
         </div>
     </div>
-
-    @if(session('success'))
-    <div id="successModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" 
-        style="backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); animation: fadeInBackdrop 0.3s ease-out;" 
-        data-modal-timestamp="{{ time() }}">
-        <div class="bg-white rounded-2xl shadow-2xl p-8 max-w-md w-full mx-4 animate-slideUp">
-            <div class="text-center">
-                <div class="mx-auto flex items-center justify-center h-16 w-16 rounded-full bg-green-100 mb-4">
-                    <svg class="h-10 w-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
-                    </svg>
-                </div>
-                
-                <h3 class="text-2xl font-bold text-gray-900 mb-3">Berhasil!</h3>
-                <p class="text-gray-600 mb-6">{{ session('success') }}</p>
-                
-                <button onclick="event.stopPropagation(); PenghuniIndex.closeSuccessModal(false);" class="bg-green-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-green-700 transition-all transform hover:scale-105">
-                    OK, Mengerti
-                </button>
-            </div>
-        </div>
-    </div>
-    @endif
 @endsection
 
 @push('scripts')
