@@ -5,7 +5,7 @@
     <title>Surat SIP {{ $penghuni->nama }}</title>
     <style>
         body {
-            font-family: 'Times New Roman', Times, serif;
+            font-family: Arial, sans-serif;
             font-size: 12pt;
             line-height: 1.5;
             margin: 0;
@@ -13,11 +13,11 @@
         }
 
         @page {
-            margin: 1cm 2.5cm;
+            margin: 0.7cm 2.5cm;
         }
 
         .spacer-top {
-            margin-top: 1cm; 
+            margin-top: 0.7cm; 
         }
 
         .container {
@@ -40,25 +40,41 @@
         .header {
             text-align: center;
             margin-bottom: 12px;
-            width: 100%;
+            margin-left: -1.8cm; 
+            margin-right: -1.8cm;
         }
         .header .logo-kiri {
-            max-height: 75px;
+            max-height: 90px; 
             float: left;
-            margin-right: 20px;
+            margin-right: 0px;
+            margin-left: 55px;
+            margin-top: -5px;
         }
         .non-italic {
             font-style: normal !important;
         }
         
-        .kop-surat-teks { text-align: center; }
+        .kop-surat-teks { 
+            text-align: center;
+            padding-top: 5px; 
+            padding-right: 45px;
+        }
+
         .header h1 { font-size: 14pt; font-weight: bold; margin: 0; line-height: 1.2; }
         .header h2 { font-size: 16pt; font-weight: bold; margin: 0; line-height: 1.2; }
         .header p { font-size: 12pt; margin: 0; line-height: 1.2; }
         .clear { clear: both; }
         .line-divider {
-            border-bottom: 3px solid black;
+            border-bottom: 1px solid black;
             margin-top: 8px;
+            margin-bottom: 1px;
+            margin-left: -1.3cm;  
+            margin-right: -1.3cm;
+        }
+
+        .line-divider-thick {
+            border-bottom: 3px solid black;
+            margin-top: 1px;
             margin-bottom: 10px;
             margin-left: -1.3cm;  
             margin-right: -1.3cm;
@@ -151,6 +167,7 @@
             padding-top: 0;
             padding-left: 15px;
             padding-right: 15px;
+            line-height: 1;
         }
         .catatan-sip .catatan-title {
             font-size: 9pt;
@@ -283,7 +300,7 @@
         .bast-catatan p {
             font-size: 9pt;
             font-style: italic;
-            line-height: 1.3;
+            line-height: 1.1;
             text-align: justify;
             margin-top: 2px;
         }
@@ -304,9 +321,10 @@
                 <div class="clear"></div>
             </div>
             <div class="line-divider"></div>
+            <div class="line-divider-thick"></div>
 
             <p class="title">SURAT IJIN PENGHUNIAN</p>
-            <p class="subtitle" style="font-weight: bold; text-decoration: none;">Nomor : {{ $kontrak->no_sip ?? '' }}</p>
+            <p class="subtitle" style="text-decoration: none;">Nomor : {{ $kontrak->no_sip ?? '' }}</p>
 
             <div class="content">
                 <p>Berdasarkan pada Surat Perjanjian Sewa Menyewa Rusunawa Nomor {{ $kontrak->no_sps ?? '' }}, maka kepada tersebut di bawah ini:</p>

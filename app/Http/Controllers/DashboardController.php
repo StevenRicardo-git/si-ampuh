@@ -265,11 +265,11 @@ class DashboardController extends Controller
 
         $breakdown = [];
         $labels = [
-            '0-5' => 'Balita (0-5 tahun)',
-            '5-12' => 'Usia Sekolah (5-12 tahun)',
-            '12-18' => 'Remaja (12-18 tahun)',
-            '18-60' => 'Produktif (18-60 tahun)',
-            '60+' => 'Senior (60+ tahun)'
+            '0-5' => '0-5 tahun',
+            '5-12' => '5-12 tahun',
+            '12-18' => '12-18 tahun',
+            '18-60' => '18-60 tahun',
+            '60+' => '60+ tahun'
         ];
 
         foreach ($kelompokUmur as $key => $value) {

@@ -820,7 +820,6 @@ const Dashboard = {
                             <span class="text-sm font-medium text-gray-700">${item.label}</span>
                         </div>
                         <div class="flex items-center gap-3">
-                            <span class="text-sm text-gray-500">${item.persentase}%</span>
                             <span class="font-bold text-gray-900">${item.jumlah} orang</span>
                         </div>
                     </div>

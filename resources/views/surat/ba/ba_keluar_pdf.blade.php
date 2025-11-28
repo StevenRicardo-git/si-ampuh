@@ -5,7 +5,7 @@
     <title>Surat BA Keluar {{ $penghuni->nama }}</title>
     <style>
         body {
-            font-family: 'Times New Roman', Times, serif;
+            font-family: Arial, sans-serif;
             font-size: 12pt;
             line-height: 1.3;
             margin: 0;
@@ -13,11 +13,11 @@
         }
         
         @page {
-            margin: 1cm 2.5cm;
+            margin: 0.7cm 2.5cm;
         }
 
         .spacer-top {
-            margin-top: 1cm; 
+            margin-top: 0.7cm; 
         }
 
         .page-break {
@@ -34,25 +34,41 @@
         .header {
             text-align: center;
             margin-bottom: 12px;
+            margin-left: -1.8cm; 
+            margin-right: -1.8cm;
         }
         .header .logo-kiri {
-            max-height: 75px;
+            max-height: 90px; 
             float: left;
-            margin-right: 20px;
+            margin-right: 0px;
+            margin-left: 55px;
+            margin-top: -5px;
         }
-        .kop-surat-teks { text-align: center; }
+        .kop-surat-teks { 
+            text-align: center;
+            padding-top: 5px; 
+            padding-right: 45px;
+        }
+
         .header h1 { font-size: 14pt; font-weight: bold; margin: 0; line-height: 1.2; }
         .header h2 { font-size: 16pt; font-weight: bold; margin: 0; line-height: 1.2; }
         .header p { font-size: 12pt; margin: 0; line-height: 1.2; }
         .clear { clear: both; }
         .line-divider {
-            border-bottom: 3px solid black;
+            border-bottom: 1px solid black;
             margin-top: 8px;
+            margin-bottom: 1px;
+            margin-left: -1.3cm;  
+            margin-right: -1.3cm;
+        }
+
+        .line-divider-thick {
+            border-bottom: 3px solid black;
+            margin-top: 1px;
             margin-bottom: 10px;
             margin-left: -1.3cm;  
             margin-right: -1.3cm;
         }
-   
         .title {
             text-align: center;
             font-size: 12pt;
@@ -236,6 +252,7 @@
             <div class="clear"></div>
         </div>
         <div class="line-divider"></div>
+        <div class="line-divider-thick"></div>
 
         <p class="title">BERITA ACARA PEMUTUSAN PERJANJIAN SEWA MENYEWA</p>
         <p class="title" style="margin-top: 0;">RUMAH SUSUN SEDERHANA SEWA KOTA TEGAL</p>
@@ -284,7 +301,7 @@
             </table>
             <br>
             <div class="signature-kepala-dinas">
-                <p>Plt. KEPALA DINAS PERUMAHAN DAN</p>
+                <p>KEPALA DINAS PERUMAHAN DAN</p>
                 <p>KAWASAN PERMUKIMAN KOTA TEGAL</p>
                 <br><br>
                 <p class="nama-kepala">{{ $kepala_dinas_nama }}</p>

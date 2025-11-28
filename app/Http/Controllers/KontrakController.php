@@ -83,13 +83,18 @@ class KontrakController extends Controller
         
         if (!$unit) {
             try {
+                \OwenIt\Auditing\Models\Audit::disableAuditing();
+                
                 $unit = Unit::create([
                     'kode_unit' => $validatedData['unit_kode'],
                     'tipe' => $this->getUnitType($validatedData['unit_kode']),
                     'status' => 'tersedia',
                     'harga_sewa' => 0
                 ]);
+                
+                \OwenIt\Auditing\Models\Audit::enableAuditing();
             } catch (\Exception $e) {
+                \OwenIt\Auditing\Models\Audit::enableAuditing();
                 return back()
                     ->withInput()
                     ->with('error', 'Gagal membuat unit baru: ' . $e->getMessage());
@@ -126,6 +131,11 @@ class KontrakController extends Controller
         ];
         
         try {
+             DB::beginTransaction();
+            
+            $batchDescription = "Menambah Kontrak: {$penghuni->nama} ke Unit {$unit->kode_unit}";
+            AuditBatchService::start($batchDescription);
+
             $kontrak = Kontrak::create($dataToStore);
 
             $penghuni->status = 'aktif';
@@ -133,11 +143,18 @@ class KontrakController extends Controller
             $unit->status = 'terisi';
             $unit->save();
 
+            AuditBatchService::end();
+            
+            DB::commit();
+
             return redirect()
                 ->route('penghuni.show', $penghuni->id)
                 ->with('success', 'Kontrak baru berhasil dibuat dan status penghuni telah diaktifkan!');
                 
         } catch (\Exception $e) {
+            AuditBatchService::end();
+            DB::rollBack();
+            
             return back()
                 ->withInput()
                 ->with('error', 'Terjadi kesalahan saat menyimpan kontrak: ' . $e->getMessage());
